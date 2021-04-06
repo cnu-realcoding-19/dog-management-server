@@ -21,4 +21,8 @@ public class DogController {
         dogManagementService.insertDog(dog);
     }
 
+    @GetMapping("/dogs/{name}")
+    public Dog getDogByName(@PathVariable String name){
+        return dogManagementService.getDogByName(name);
+    }
 }
