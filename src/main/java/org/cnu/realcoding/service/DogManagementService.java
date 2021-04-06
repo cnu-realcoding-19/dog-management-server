@@ -7,6 +7,8 @@ import org.cnu.realcoding.repository.DogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DogManagementService {
     @Autowired
@@ -20,28 +22,28 @@ public class DogManagementService {
         }
     }
 
-    public Dog getDogByName(String name) {
-        Dog dog = dogRepository.findDogByName(name);
-        if (dog==null){
+    public List<Dog> getDogsByName(String name) {
+        List<Dog> dogs = dogRepository.findDogsByName(name);
+        if (dogs.size()==0){
             throw new DogNotFoundException();
         }
-        return dog;
+        return dogs;
     }
 
-    public Dog getDogByOwnerName(String ownerName) {
-        Dog dog = dogRepository.findDogByOwnerName(ownerName);
-        if (dog==null){
+    public List<Dog> getDogsByOwnerName(String ownerName) {
+        List<Dog> dogs = dogRepository.findDogsByOwnerName(ownerName);
+        if (dogs.size()==0){
             throw new DogNotFoundException();
         }
-        return dog;
+        return dogs;
     }
 
-    public Dog getDogByOwnerPhoneNumber(String ownerPhoneNumber) {
-        Dog dog = dogRepository.findDogByOwnerPhoneNumber(ownerPhoneNumber);
-        if (dog==null){
+    public List<Dog> getDogsByOwnerPhoneNumber(String ownerPhoneNumber) {
+        List<Dog> dogs = dogRepository.findDogsByOwnerPhoneNumber(ownerPhoneNumber);
+        if (dogs.size()==0){
             throw new DogNotFoundException();
         }
-        return dog;
+        return dogs;
     }
 
     public Dog getDog(String name, String ownerName, String ownerPhoneNumber) {
