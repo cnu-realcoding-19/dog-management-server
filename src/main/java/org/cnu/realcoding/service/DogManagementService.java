@@ -1,6 +1,8 @@
 package org.cnu.realcoding.service;
 
 import org.cnu.realcoding.domain.Dog;
+import org.cnu.realcoding.domain.Dogs;
+import org.cnu.realcoding.exception.DogBadRequestException;
 import org.cnu.realcoding.exception.DogConflictException;
 import org.cnu.realcoding.exception.DogNotFoundException;
 import org.cnu.realcoding.repository.DogRepository;
@@ -53,4 +55,29 @@ public class DogManagementService {
         }
         return dog;
     }
+
+
+    public void updateDog(Dogs dogs){
+
+        Dog dog = dogs.getDogToBeUpdated();
+        Dog dogUpdate = dogs.getDogToUpdate();
+
+        if (dogRepository.findDog(dog.getName(),dog.getOwnerName(),dog.getOwnerPhoneNumber()) == null){
+            throw new DogNotFoundException();
+        }
+        if(!(dog.getMedicalRecords().equals(dogRepository.findDog(dog.getName(), dog.getOwnerName(), dog.getOwnerPhoneNumber()).getMedicalRecords())))
+            throw new DogBadRequestException();
+
+        dogRepository.updateDog(dog, dogUpdate);
+
+    }
+
+    public void updateKind(Dog dog, String kind){
+        if (dogRepository.findDog(dog.getName(),dog.getOwnerName(),dog.getOwnerPhoneNumber())== null){
+            throw new DogNotFoundException();
+        }
+        dogRepository.updateKind(dog, kind);
+    }
+
+
 }

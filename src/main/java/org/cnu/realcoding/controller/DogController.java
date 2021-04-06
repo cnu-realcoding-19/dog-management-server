@@ -1,6 +1,7 @@
 package org.cnu.realcoding.controller;
 
 import org.cnu.realcoding.domain.Dog;
+import org.cnu.realcoding.domain.Dogs;
 import org.cnu.realcoding.service.DogManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,4 +41,16 @@ public class DogController {
     public Dog getDog(@RequestParam("name") String name, @RequestParam("ownerName") String ownerName, @RequestParam("ownerPhoneNumber") String ownerPhoneNumber){
         return dogManagementService.getDog(name, ownerName, ownerPhoneNumber);
     }
+
+    @PutMapping("/dogs/update")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateDog(@RequestBody Dogs dogs) { dogManagementService.updateDog(dogs);}
+
+    @PutMapping("/dogs/update/{kind}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateKind(@RequestBody Dog dog, @PathVariable String kind) { dogManagementService.updateKind(dog, kind);}
+
+
+
+
 }
