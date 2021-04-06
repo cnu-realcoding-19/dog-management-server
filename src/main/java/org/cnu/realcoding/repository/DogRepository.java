@@ -16,8 +16,16 @@ public class DogRepository {
         return mongoTemplate.findOne(Query.query(Criteria.where("name").is(name).and("ownerName").is(ownerName).and("ownerPhoneNumber").is(ownerPhoneNumber)), Dog.class);
     }
 
-    public Dog findDog(String name){
+    public Dog findDogByName(String name){
         return mongoTemplate.findOne(Query.query(Criteria.where("name").is(name)), Dog.class);
+    }
+
+    public Dog findDogByOwnerName(String ownerName){
+        return mongoTemplate.findOne(Query.query(Criteria.where("ownerName").is(ownerName)), Dog.class);
+    }
+
+    public Dog findDogByOwnerPhoneNumber(String ownerPhoneNumber){
+        return mongoTemplate.findOne(Query.query(Criteria.where("ownerPhoneNumber").is(ownerPhoneNumber)), Dog.class);
     }
 
     public void insertDog(Dog dog) {

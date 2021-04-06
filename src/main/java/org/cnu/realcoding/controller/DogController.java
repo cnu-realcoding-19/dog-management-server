@@ -21,8 +21,23 @@ public class DogController {
         dogManagementService.insertDog(dog);
     }
 
-    @GetMapping("/dogs/{name}")
+    @GetMapping("/dogs/name/{name}")
     public Dog getDogByName(@PathVariable String name){
         return dogManagementService.getDogByName(name);
+    }
+
+    @GetMapping("/dogs/ownerName/{ownerName}")
+    public Dog getDogByOwnerName(@PathVariable String ownerName){
+        return dogManagementService.getDogByOwnerName(ownerName);
+    }
+
+    @GetMapping("/dogs/ownerPhoneNumber/{ownerPhoneNumber}")
+    public Dog getDogByOwnerPhoneNumber(@PathVariable String ownerPhoneNumber){
+        return dogManagementService.getDogByOwnerPhoneNumber(ownerPhoneNumber);
+    }
+
+    @GetMapping("/dogs")
+    public Dog getDog(@RequestParam("name") String name, @RequestParam("ownerName") String ownerName, @RequestParam("ownerPhoneNumber") String ownerPhoneNumber){
+        return dogManagementService.getDog(name, ownerName, ownerPhoneNumber);
     }
 }
