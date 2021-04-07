@@ -46,7 +46,7 @@ public class DogController {
     @ResponseStatus(HttpStatus.OK)
     public void updateDog(@RequestBody DogUpdateRequestDto dogUpdateRequestDto) { dogManagementService.updateDog(dogUpdateRequestDto);}
 
-    @PutMapping("/dogs/kind/{kind}")
+    @PatchMapping("/dogs/kind/{kind}")
     @ResponseStatus(HttpStatus.OK)
     public void updateKind(@RequestBody Dog dog, @PathVariable String kind) { dogManagementService.updateKind(dog, kind);}
 
