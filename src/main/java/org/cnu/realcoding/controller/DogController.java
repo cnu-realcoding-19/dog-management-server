@@ -40,4 +40,10 @@ public class DogController {
     public Dog getDog(@RequestParam("name") String name, @RequestParam("ownerName") String ownerName, @RequestParam("ownerPhoneNumber") String ownerPhoneNumber){
         return dogManagementService.getDog(name, ownerName, ownerPhoneNumber);
     }
+
+    @PatchMapping("/dogs/medicalRecords")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateMedicalRecord(@RequestBody Dog dog, @RequestParam("medicalRecords") String medicalRecord) {
+        dogManagementService.updateMedicalRecord(dog, medicalRecord);
+    }
 }

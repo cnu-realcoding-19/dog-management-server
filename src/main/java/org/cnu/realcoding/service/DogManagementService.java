@@ -53,4 +53,11 @@ public class DogManagementService {
         }
         return dog;
     }
+
+    public void updateMediclaRecord(Dog dog, String medicalRecord) {
+        if (dogRepository.findDog(dog.getName(), dog.getOwnerName(), dog.getPhonwNumber()) == null) {
+            throw new DogNotFoundException();
+        }
+        dogRepository.updateMedicalRecord(dog, medicalRecord);
+    }
 }
