@@ -35,6 +35,27 @@ public class DogRepository {
         mongoTemplate.insert(dog);
     }
 
+    public void updateDog(Dog dog, Dog dogUpdate){
+
+        Query query = new Query(Criteria.where("name").is(dog.getName()).and("ownerName").is(dog.getOwnerName()).and("ownerPhoneNumber").is(dog.getOwnerPhoneNumber()));
+        Update update = new Update();
+        update.set("name", dogUpdate.getName());
+        update.set("ownerName", dogUpdate.getOwnerName());
+        update.set("ownerPhoneNumber", dogUpdate.getOwnerPhoneNumber());
+        update.set("kind", dogUpdate.getKind());
+        List<String> medical_records = dog.getMedicalRecords();
+        medical_records.addAll(dogUpdate.getMedicalRecords());
+        update.set("medicalRecords", medical_records);
+        mongoTemplate.updateFirst(query, update, Dog.class);
+    }
+
+    public void updateKind(Dog dog, String kind){
+        mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(dog.getName()).and("ownerName").is(dog.getOwnerName()).and("ownerPhoneNumber").is(dog.getOwnerPhoneNumber())),
+                Update.update("kind", kind),
+                Dog.class
+        );
+    }
+  
     public void updateMedicalRecord(Dog dog, String medicalRecord) {
         List<String> medical_records = dog.getMedicalRecords();
         medical_records.add(medicalRecord);
@@ -43,4 +64,6 @@ public class DogRepository {
                 Dog.class
         );
     }
+
+
 }
