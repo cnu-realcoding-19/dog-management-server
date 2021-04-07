@@ -54,13 +54,14 @@ public class DogManagementService {
         return dog;
     }
 
-    public void updateMediclaRecord(Dog dog, String medicalRecord) {
-        if (dogRepository.findDog(dog.getName(), dog.getOwnerName(), dog.getPhonwNumber()) == null) {
+    public void updateMedicalRecord(Dog dog, String medicalRecord) {
+        if (dogRepository.findDog(dog.getName(), dog.getOwnerName(), dog.getOwnerPhoneNumber()) == null) {
             throw new DogNotFoundException();
         }
         if(!(dog.getMedicalRecords().equals(dogRepository.findDog(dog.getName(), dog.getOwnerName(), dog.getOwnerPhoneNumber()).getMedicalRecords()))) {
-            throw new DogBadRequestException();
+            throw new DogConflictException();
         }
         dogRepository.updateMedicalRecord(dog, medicalRecord);
     }
+
 }
