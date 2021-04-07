@@ -56,7 +56,6 @@ public class DogManagementService {
         return dog;
     }
 
-
     public void updateDog(DogUpdateRequestDto dogUpdateRequestDto){
 
         Dog dog = dogUpdateRequestDto.getDogToBeUpdated();
@@ -82,6 +81,15 @@ public class DogManagementService {
         }
         dogRepository.updateKind(dog, kind);
     }
-
+  
+    public void updateMedicalRecord(Dog dog, String medicalRecord) {
+        if (dogRepository.findDog(dog.getName(), dog.getOwnerName(), dog.getOwnerPhoneNumber()) == null) {
+            throw new DogNotFoundException();
+        }
+        if(!(dog.getMedicalRecords().equals(dogRepository.findDog(dog.getName(), dog.getOwnerName(), dog.getOwnerPhoneNumber()).getMedicalRecords()))) {
+            throw new DogConflictException();
+        }
+        dogRepository.updateMedicalRecord(dog, medicalRecord);
+    }
 
 }

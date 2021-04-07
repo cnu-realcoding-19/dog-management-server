@@ -55,5 +55,15 @@ public class DogRepository {
                 Dog.class
         );
     }
+  
+    public void updateMedicalRecord(Dog dog, String medicalRecord) {
+        List<String> medical_records = dog.getMedicalRecords();
+        medical_records.add(medicalRecord);
+        mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(dog.getName()).and("ownerName").is(dog.getOwnerName()).and("ownerPhoneNumber").is(dog.getOwnerPhoneNumber())),
+                Update.update("medicalRecords", medical_records),
+                Dog.class
+        );
+    }
+
 
 }

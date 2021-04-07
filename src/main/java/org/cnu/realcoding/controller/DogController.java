@@ -50,7 +50,10 @@ public class DogController {
     @ResponseStatus(HttpStatus.OK)
     public void updateKind(@RequestBody Dog dog, @PathVariable String kind) { dogManagementService.updateKind(dog, kind);}
 
-
-
+    @PatchMapping("/dogs/medicalRecords")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateMedicalRecord(@RequestBody Dog dog, @RequestParam("medicalRecords") String medicalRecord) {
+        dogManagementService.updateMedicalRecord(dog, medicalRecord);
+    }
 
 }
