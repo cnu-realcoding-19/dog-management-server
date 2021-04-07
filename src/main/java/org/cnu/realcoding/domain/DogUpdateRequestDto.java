@@ -1,6 +1,6 @@
 package org.cnu.realcoding.domain;
 
-public class Dogs {
+public class DogUpdateRequestDto {
 
     Dog dogToBeUpdated;
     Dog dogToUpdate;
