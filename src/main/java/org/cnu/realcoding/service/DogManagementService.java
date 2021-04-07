@@ -65,8 +65,12 @@ public class DogManagementService {
         if (dogRepository.findDog(dog.getName(),dog.getOwnerName(),dog.getOwnerPhoneNumber()) == null){
             throw new DogNotFoundException();
         }
+        if(dogRepository.findDog(dogUpdate.getName(), dogUpdate.getOwnerName(), dogUpdate.getOwnerPhoneNumber()) != null){
+            throw new DogConflictException();
+        }
         if(!(dog.getMedicalRecords().equals(dogRepository.findDog(dog.getName(), dog.getOwnerName(), dog.getOwnerPhoneNumber()).getMedicalRecords())))
             throw new DogBadRequestException();
+
 
         dogRepository.updateDog(dog, dogUpdate);
 
